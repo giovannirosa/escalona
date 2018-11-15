@@ -1,4 +1,4 @@
-package com.grosa.model;
+package com.grosa.serial.model;
 
 public class Edge {
 
@@ -8,6 +8,14 @@ public class Edge {
     public Edge(Vertex startPoint, Vertex endPoint) {
         this.startPoint = startPoint;
         this.endPoint = endPoint;
+    }
+
+    @Override
+    public String toString() {
+        return "Edge{" +
+                "startPoint=" + startPoint +
+                ", endPoint=" + endPoint +
+                '}';
     }
 
     public Vertex getStartPoint() {

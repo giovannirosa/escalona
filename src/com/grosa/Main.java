@@ -1,9 +1,8 @@
 package com.grosa;
 
-import com.grosa.model.Graph;
-import com.grosa.model.Vertex;
 import com.grosa.model.Schedule;
 import com.grosa.model.Transaction;
+import com.grosa.serial.SerialDetector;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -18,72 +17,8 @@ public class Main {
         System.out.println("Data collected:");
         transactionList.forEach(t -> System.out.println(t));
 
-        List<Schedule> scheduleList = serialDetect(transactionList);
+        List<Schedule> scheduleList = SerialDetector.serialDetect(transactionList);
         scheduleList.forEach(s -> System.out.println(s));
-
-//        System.out.println("Building schedules...");
-//        List<Schedule> scheduleList = new ArrayList<>();
-//        Schedule s = new Schedule();
-//        for (Transaction t : transactionList) {
-//            if (!s.hasId(t.getId())) {
-//                s.addTransaction(t);
-//            }
-//            if (t.getOperacao().equals("C")) {
-//
-//            }
-//        }
-    }
-
-    private static List<Schedule> serialDetect(List<Transaction> transactionList) {
-        int id = 1;
-        List<Schedule> scheduleList = new ArrayList<>();
-        Schedule s = new Schedule(id);
-        Graph g = new Graph("serial");
-        List<Transaction> operations = new ArrayList<>();
-        for (Transaction tj : transactionList) {
-            if (!g.hasTransaction(tj)) {
-                g.addNodo(new Vertex(tj.getId()));
-            }
-
-            if (tj.getOperacao().equals("R")) {
-                for (Transaction ti : operations) {
-                    if (ti.getOperacao().equals("W") && tj.getAtributo().equals(ti.getAtributo())) {
-                        g.findNode(ti.getId()).addVizinho(g.findNode(tj.getId()));
-                    }
-                }
-            }
-            if (tj.getOperacao().equals("W")) {
-                for (Transaction ti : operations) {
-                    if (ti.getOperacao().equals("R") && tj.getAtributo().equals(ti.getAtributo())) {
-                        g.findNode(ti.getId()).addVizinho(g.findNode(tj.getId()));
-                    }
-                }
-            }
-            if (tj.getOperacao().equals("W")) {
-                for (Transaction ti : operations) {
-                    if (ti.getOperacao().equals("W") && tj.getAtributo().equals(ti.getAtributo())) {
-                        g.findNode(ti.getId()).addVizinho(g.findNode(tj.getId()));
-                    }
-                }
-            }
-
-            if (tj.getOperacao().equals("C")) {
-                g.findNode(tj.getId()).setCommitted(true);
-            }
-            if (g.allCommitted()) {
-                for (Vertex n : g.getNodos()) {
-                    s.addTransaction(n.getTransaction());
-                }
-                if (g.hasCycle())
-                    s.setSerial("NS");
-                else
-                    s.setSerial("SS");
-                scheduleList.add(s);
-                s = new Schedule(++id);
-                g = new Graph("serial");
-            }
-        }
-        return scheduleList;
     }
 
     private static List<Transaction> collectData() throws FileNotFoundException {

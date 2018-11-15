@@ -1,19 +1,31 @@
-package com.grosa.model;
+package com.grosa.serial.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Vertex {
+    private Graph parent;
     private int transaction;
     private boolean committed;
     private int grau;
     private List<Edge> vizinhos;
 
-    public Vertex(int transaction) {
+    public Vertex(Graph parent, int transaction) {
+        this.parent = parent;
         this.transaction = transaction;
         this.committed = false;
         this.grau = 0;
         this.vizinhos = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        return "Vertex{" +
+                "transaction=" + transaction +
+                ", committed=" + committed +
+                ", grau=" + grau +
+                ", vizinhos=" + vizinhos +
+                '}';
     }
 
     public boolean isCommitted() {
@@ -46,5 +58,6 @@ public class Vertex {
 
     public void addVizinho(Vertex viz) {
         this.vizinhos.add(new Edge(this,viz));
+        parent.setArestas(parent.getArestas()+1);
     }
 }

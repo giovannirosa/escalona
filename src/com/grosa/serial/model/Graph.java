@@ -1,4 +1,6 @@
-package com.grosa.model;
+package com.grosa.serial.model;
+
+import com.grosa.model.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,16 @@ public class Graph {
         this.arestas = 0;
     }
 
+    @Override
+    public String toString() {
+        return "Graph{" +
+                "nome='" + nome + '\'' +
+                ", nodos=" + nodos +
+                ", vertices=" + vertices +
+                ", arestas=" + arestas +
+                '}';
+    }
+
     public boolean hasCycle() {
         List<Edge> edges = new ArrayList<>();
         for (Vertex n : getNodos()) {
@@ -24,7 +36,8 @@ public class Graph {
         }
         for (Edge e1 : edges) {
             for (Edge e2 : edges) {
-                if (e1.getStartPoint().getTransaction() == e2.getEndPoint().getTransaction() &&
+                if (e1 != e2 &&
+                        e1.getStartPoint().getTransaction() == e2.getEndPoint().getTransaction() &&
                         e1.getEndPoint().getTransaction() == e2.getStartPoint().getTransaction()) {
                     return true;
                 }
