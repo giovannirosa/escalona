@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SerialDetector {
-    public static List<Schedule> serialDetect(List<Transaction> transactionList) {
+    public static void detect(List<Transaction> transactionList, List<Schedule> scheduleList) {
         int id = 1;
-        List<Schedule> scheduleList = new ArrayList<>();
         Schedule s = new Schedule(id);
         Graph g = new Graph("serial");
         List<Transaction> operations = new ArrayList<>();
@@ -63,6 +62,5 @@ public class SerialDetector {
                 operations.clear();
             }
         }
-        return scheduleList;
     }
 }

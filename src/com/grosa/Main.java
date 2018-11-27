@@ -1,14 +1,13 @@
 package com.grosa;
 
+import com.grosa.equivalent.EquivalentDetector;
 import com.grosa.model.Schedule;
 import com.grosa.model.Transaction;
 import com.grosa.serial.SerialDetector;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -17,7 +16,10 @@ public class Main {
         System.out.println("Data collected:");
         transactionList.forEach(t -> System.out.println(t));
 
-        List<Schedule> scheduleList = SerialDetector.serialDetect(transactionList);
+        List<Schedule> scheduleList = new ArrayList<>();
+        SerialDetector.detect(transactionList,scheduleList);
+        EquivalentDetector.detect(transactionList,scheduleList);
+
         scheduleList.forEach(s -> System.out.println(s));
     }
 
@@ -25,11 +27,11 @@ public class Main {
         Scanner sc = new Scanner(new FileReader("entrada"));//System.in
         System.out.println("Printing the file passed in:");
         List<Transaction> transactionList = new ArrayList<>();
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             String line = sc.nextLine();
             System.out.println(line);
             String[] param = line.split(" ");
-            transactionList.add(new Transaction(Integer.valueOf(param[0]),Integer.valueOf(param[1]),param[2],param[3]));
+            transactionList.add(new Transaction(Integer.valueOf(param[0]), Integer.valueOf(param[1]), param[2], param[3]));
         }
         return transactionList;
     }
