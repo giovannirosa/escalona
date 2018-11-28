@@ -3,6 +3,9 @@ package com.grosa.equivalent.permutation;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe para gerar permutação de forma recursiva.
+ */
 public class RecursiveCounter<T> implements PermutationResolver<T> {
 
     private int i;

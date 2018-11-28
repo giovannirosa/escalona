@@ -10,8 +10,16 @@ import java.io.FileReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * @author Giovanni Rosa
+ * @version 1.0
+ */
 public class Main {
 
+    /**
+     * Detecta se os escalonamentos são serializáveis ou não fazendo o
+     * teste por conflito e o teste de equivalência por visão.
+     */
     public static void main(String[] args) throws FileNotFoundException {
         List<Transaction> transactionList = collectData();
 //        System.out.println("Data collected:");
@@ -19,22 +27,29 @@ public class Main {
 
         List<Schedule> scheduleList = new ArrayList<>();
 
+        // Gera lista de escalonamento e faz o teste por conflito
         SerialDetector.detect(transactionList,scheduleList);
+        // Faz o teste de equivalência por visão
         EquivalentDetector.detect(transactionList,scheduleList);
 
+        // Imprime resultados na saída padrão (stdout)
         scheduleList.forEach(s -> {
+            // Agrupa transações do escalonamento e ordena
             List<Integer> list = s.getTransactions().keySet().stream()
                                                             .sorted()
                                                             .collect(Collectors.toList());
+            // Imprime resultados
             System.out.println(s.getId()+" "
                 +list.toString().replaceAll("\\[","")
-                                                        .replaceAll("]","")
-                                                        .replaceAll(" ","")
+                                .replaceAll("]","")
+                                .replaceAll(" ","")
                 +" "+s.getSerial()+" "+s.getVisao());
         });
     }
 
-    /** Coleta os dados da entrada padrão (stdin) e transforma cada linha em Transaction
+    /**
+     * Coleta os dados da entrada padrão (stdin) e transforma cada linha em Transaction
+     * @return lista de transações
      */
     private static List<Transaction> collectData() throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);//System.in

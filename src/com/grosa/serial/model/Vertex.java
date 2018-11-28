@@ -3,6 +3,11 @@ package com.grosa.serial.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe para representar um vértice do grafo com informação de qual grafo
+ * pertence, número da transação, se foi confirmado, se foi visitado, se está
+ * sendo visitado, grau e lista de vizinhos.
+ */
 public class Vertex {
     private Graph parent;
     private int transaction;
@@ -76,6 +81,7 @@ public class Vertex {
 
     public void addVizinho(Vertex viz) {
         this.vizinhos.add(new Edge(this,viz));
+        grau++;
         parent.setArestas(parent.getArestas()+1);
     }
 }

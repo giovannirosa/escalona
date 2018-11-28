@@ -1,5 +1,8 @@
 package com.grosa.serial.model;
 
+/**
+ * Classe para representar uma aresta, com vértice inicial e final, sem peso.
+ */
 public class Edge {
 
     private Vertex startPoint;

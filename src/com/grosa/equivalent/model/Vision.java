@@ -5,6 +5,12 @@ import com.grosa.model.Transaction;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Classe para representar uma Visão com informações de escalonamento,
+ * lista de transações mapeadas, lista de transações de forma linear,
+ * lista da ordem das transações, últimas escritas por atributo da 
+ * visão original, relações de read e write da visão original.
+ */
 public class Vision {
     int schedule;
     Map<Integer,List<Transaction>> transactions;
@@ -64,6 +70,9 @@ public class Vision {
         return transactions;
     }
 
+    /**
+     * Reordena as transações de acordo com a nova ordem permutada.
+     */
     public void reOrder(List<Integer> newOrder) {
         order = newOrder;
         timeline.clear();
@@ -73,6 +82,9 @@ public class Vision {
         transactions = map;
     }
 
+    /**
+     * Configura as transações, sua ordem atual e linearidade
+     */
     public void setTransactions(Map<Integer, List<Transaction>> map) {
         map.forEach((k,v) -> v.forEach(t -> timeline.add(t)));
         map.keySet().forEach(i -> order.add(i));

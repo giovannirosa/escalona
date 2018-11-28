@@ -2,6 +2,10 @@ package com.grosa.model;
 
 import java.util.*;
 
+/**
+ * Classe para representar um escalonamento, com id, lista de transações,
+ * tempos de início e término, e se é serial por conflito e visão.
+ */
 public class Schedule {
 
     private int id;

@@ -5,6 +5,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * Classe para permutar a visão de todas as formas.
+ * Iterator permite que as permutações sejam geradas em tempo real,
+ * assim não é necessário fazer todas as permutações previamente.
+ * <p>Inspirado na permutação do Apache:
+ * https://commons.apache.org/proper/commons-collections/apidocs/org/apache/commons/collections4/iterators/PermutationIterator.html
+ */
 public class PermutationIterator<T> implements Iterator<List<T>> {
 
     private List<T> base;

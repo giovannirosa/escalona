@@ -1,5 +1,8 @@
 package com.grosa.model;
 
+/**
+ * Classe para representar uma transação, com id, tempo de chegada, operação e atributo.
+ */
 public class Transaction {
 
     private int tempoChegada;

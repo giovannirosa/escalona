@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * Classe para representar um grafo, com nome, vértices e informação
+ * de quantidade de vértices e arestas.
+ */
 public class Graph {
 
     private String nome;
@@ -42,6 +46,9 @@ public class Graph {
 
     }
 
+    /**
+     * Detecta um ciclo no grafo.
+     */
     private boolean detectCycle(Vertex root) {
 
         for (Vertex vertex : getNodos()) {
@@ -53,6 +60,9 @@ public class Graph {
 
     }
 
+    /**
+     * Implementa uma busca em profundidade para encontrar um ciclo.
+     */
     private boolean dfs(Vertex root) {
         root.setBeingVisited(true);
 
@@ -70,6 +80,9 @@ public class Graph {
         return false;
     }
 
+    /**
+     * Verifica se todos os vértices foram confirmados.
+     */
     public boolean allCommitted() {
         for (Vertex n : getNodos()) {
             if (!n.isCommitted())
@@ -78,6 +91,10 @@ public class Graph {
         return true;
     }
 
+    /**
+     * Encontra nó com id especificado.
+     * @param id
+     */
     public Vertex findNode(int id) {
         for (Vertex n : getNodos()) {
             if (n.getTransaction() == id)
@@ -86,6 +103,10 @@ public class Graph {
         return null;
     }
 
+    /**
+     * Verifica se já possui vértice com transação especificada.
+     * @param transação
+     */
     public boolean hasTransaction(Transaction t) {
         for (Vertex n : getNodos()) {
             if (n.getTransaction() == t.getId())
