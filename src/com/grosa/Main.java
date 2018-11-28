@@ -19,6 +19,7 @@ public class Main {
     /**
      * Detecta se os escalonamentos são serializáveis ou não fazendo o
      * teste por conflito e o teste de equivalência por visão.
+     * @param args: argumentos de entrada
      */
     public static void main(String[] args) throws FileNotFoundException {
         List<Transaction> transactionList = collectData();

@@ -72,6 +72,7 @@ public class Vision {
 
     /**
      * Reordena as transações de acordo com a nova ordem permutada.
+     * @param newOrder: nova ordem para as transações
      */
     public void reOrder(List<Integer> newOrder) {
         order = newOrder;
@@ -84,6 +85,7 @@ public class Vision {
 
     /**
      * Configura as transações, sua ordem atual e linearidade
+     * @param map: mapeamento das transações por id
      */
     public void setTransactions(Map<Integer, List<Transaction>> map) {
         map.forEach((k,v) -> v.forEach(t -> timeline.add(t)));

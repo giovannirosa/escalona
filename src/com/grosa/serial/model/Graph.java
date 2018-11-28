@@ -82,6 +82,7 @@ public class Graph {
 
     /**
      * Verifica se todos os vértices foram confirmados.
+     * @return boolean
      */
     public boolean allCommitted() {
         for (Vertex n : getNodos()) {
@@ -93,7 +94,8 @@ public class Graph {
 
     /**
      * Encontra nó com id especificado.
-     * @param id
+     * @param id: transação
+     * @return Vertex
      */
     public Vertex findNode(int id) {
         for (Vertex n : getNodos()) {
@@ -105,7 +107,8 @@ public class Graph {
 
     /**
      * Verifica se já possui vértice com transação especificada.
-     * @param transação
+     * @param t: transação
+     * @return boolean
      */
     public boolean hasTransaction(Transaction t) {
         for (Vertex n : getNodos()) {

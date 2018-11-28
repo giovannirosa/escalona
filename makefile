@@ -1,6 +1,5 @@
-base=src/com/grosa
-
 all:
+	rm -rf bin escalona
 	mkdir bin
 	find . -name "*.java" -print | xargs javac -d bin
 	find . -name "*.java" -print | xargs javadoc -d bin
