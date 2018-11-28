@@ -34,6 +34,8 @@ public class Main {
         });
     }
 
+    /** Coleta os dados da entrada padrão (stdin) e transforma cada linha em Transaction
+     */
     private static List<Transaction> collectData() throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);//System.in
 //        System.out.println("Printing the file passed in:");
