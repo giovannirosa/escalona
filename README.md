@@ -19,7 +19,7 @@ Com o comando make são gerados arquivos do javadoc no diretório bin. Abra o in
 
 ### IntelliJ
 
-Esse trabalho foi desenvolvido utilizando a IDE IntelliJ(https://www.jetbrains.com/idea/), é possível importar esse projeto para visualizá-lo.
+Esse trabalho foi desenvolvido utilizando [IntelliJ IDEA](https://www.jetbrains.com/idea/), é possível importar esse projeto para visualizá-lo.
 
 ## Testando
 
