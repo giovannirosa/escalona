@@ -12,6 +12,7 @@ public class SerialDetector {
     public static void detect(List<Transaction> transactionList, List<Schedule> scheduleList) {
         int id = 1;
         Schedule s = new Schedule(id);
+        s.setInitTime(1);
         Graph g = new Graph("serial");
         List<Transaction> operations = new ArrayList<>();
         for (Transaction tj : transactionList) {
@@ -56,8 +57,10 @@ public class SerialDetector {
                     s.setSerial("NS");
                 else
                     s.setSerial("SS");
+                s.setFinalTime(tj.getTempoChegada());
                 scheduleList.add(s);
                 s = new Schedule(++id);
+                s.setInitTime(tj.getTempoChegada()+1);
                 g = new Graph("serial");
                 operations.clear();
             }

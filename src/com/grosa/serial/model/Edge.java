@@ -13,8 +13,8 @@ public class Edge {
     @Override
     public String toString() {
         return "Edge{" +
-                "startPoint=" + startPoint +
-                ", endPoint=" + endPoint +
+                "startPoint=" + startPoint.getTransaction() +
+                ", endPoint=" + endPoint.getTransaction() +
                 '}';
     }
 

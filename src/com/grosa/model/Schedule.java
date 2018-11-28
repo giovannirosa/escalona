@@ -1,18 +1,19 @@
 package com.grosa.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Schedule {
 
     private int id;
-    private List<Integer> transactions;
-    private String serial;
-    private String visao;
+    private Map<Integer, Boolean> transactions;
+    private int finalTime;
+    private int initTime;
+    private String serial = "NS";
+    private String visao = "NV";
 
     public Schedule(int id) {
         this.id = id;
-        this.transactions = new ArrayList<>();
+        this.transactions = new LinkedHashMap<>();
     }
 
     @Override
@@ -23,6 +24,22 @@ public class Schedule {
                 ", serial='" + serial + '\'' +
                 ", visao='" + visao + '\'' +
                 '}';
+    }
+
+    public int getInitTime() {
+        return initTime;
+    }
+
+    public void setInitTime(int initTime) {
+        this.initTime = initTime;
+    }
+
+    public int getFinalTime() {
+        return finalTime;
+    }
+
+    public void setFinalTime(int finalTime) {
+        this.finalTime = finalTime;
     }
 
     public int getId() {
@@ -49,19 +66,23 @@ public class Schedule {
         this.visao = visao;
     }
 
-    public List<Integer> getTransactions() {
+    public Map<Integer, Boolean> getTransactions() {
         return transactions;
     }
 
     public void addTransaction(int t) {
-        this.transactions.add(t);
+        this.transactions.put(t,false);
     }
 
-    public boolean hasId(int id) {
-        for (int t : transactions) {
-            if (t == id)
-                return true;
-        }
-        return false;
+    public void confirmTransaction(int t) {
+        this.transactions.put(t,true);
     }
+
+    public boolean allCommitted() {
+        for (boolean c : transactions.values())
+            if (!c)
+                return false;
+        return true;
+    }
+
 }

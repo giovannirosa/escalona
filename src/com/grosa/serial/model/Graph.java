@@ -4,6 +4,7 @@ import com.grosa.model.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Graph {
 
@@ -30,19 +31,42 @@ public class Graph {
     }
 
     public boolean hasCycle() {
-        List<Edge> edges = new ArrayList<>();
-        for (Vertex n : getNodos()) {
-            edges.addAll(n.getVizinhos());
-        }
-        for (Edge e1 : edges) {
-            for (Edge e2 : edges) {
-                if (e1 != e2 &&
-                        e1.getStartPoint().getTransaction() == e2.getEndPoint().getTransaction() &&
-                        e1.getEndPoint().getTransaction() == e2.getStartPoint().getTransaction()) {
-                    return true;
-                }
+
+        for (Vertex vertex : getNodos()) {
+            if (detectCycle(vertex)) {
+                return true;
             }
         }
+
+        return false;
+
+    }
+
+    private boolean detectCycle(Vertex root) {
+
+        for (Vertex vertex : getNodos()) {
+            vertex.setBeingVisited(false);
+            vertex.setVisited(false);
+        }
+
+        return dfs(root);
+
+    }
+
+    private boolean dfs(Vertex root) {
+        root.setBeingVisited(true);
+
+        for (Edge edge : root.getVizinhos()) {
+            Vertex neighborVertex = edge.getEndPoint();
+            if (neighborVertex.isBeingVisited()) {
+                return true;
+            } else if (!neighborVertex.isVisited() && dfs(neighborVertex)) {
+                return true;
+            }
+        }
+
+        root.setVisited(true);
+        root.setBeingVisited(false);
         return false;
     }
 

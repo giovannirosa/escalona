@@ -7,6 +7,8 @@ public class Vertex {
     private Graph parent;
     private int transaction;
     private boolean committed;
+    private boolean visited;
+    private boolean beingVisited;
     private int grau;
     private List<Edge> vizinhos;
 
@@ -26,6 +28,22 @@ public class Vertex {
                 ", grau=" + grau +
                 ", vizinhos=" + vizinhos +
                 '}';
+    }
+
+    public boolean isBeingVisited() {
+        return beingVisited;
+    }
+
+    public void setBeingVisited(boolean beingVisited) {
+        this.beingVisited = beingVisited;
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 
     public boolean isCommitted() {
